@@ -1,13 +1,15 @@
 # SignLoc: Robust Localization using Navigation Signs and Public Maps
 
-This repository contains the implementation of the following [publication]():
+This repository contains the implementation of the following [publication](https://arxiv.org/pdf/2508.18606):
 ```bibtex
 @misc{zimmerman2025arxiv,
       title={SignLoc: Robust Localization using Navigation Signs and Public Map}, 
       author={Nicky Zimmerman and Joel Loo and Ayush Agrawal and David Hsu},
       year={2025},
+      eprint={2508.18606},
       archivePrefix={arXiv},
       primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2508.18606}, 
     }
 ```
 
