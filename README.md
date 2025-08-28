@@ -12,6 +12,9 @@ This repository contains the implementation of the following [publication](https
       url={https://arxiv.org/abs/2508.18606}, 
     }
 ```
+## Results
+Our live demo for both localization on the Spot platform can seen in the following video:
+[![](http://img.youtube.com/vi/EgpQHuaMOrc/0.jpg)](https://www.youtube.com/watch?v=EgpQHuaMOrc "SIGNLOC")
 
 
 ## Abstract
