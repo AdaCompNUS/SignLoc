@@ -1,0 +1,53 @@
+<launch>
+
+
+  <arg name="odomTopic" default="/spot/odometry"/>
+  <arg name="signTopic" default="/signs"/>
+  <arg name="poseTopic" default="/MCLPose"/>
+  <arg name="particleTopic" default="/MCLParticles"/>
+  <arg name="address" default="3 research link, Singapore 119391"/>
+  <arg name="navGraphPath" default="/ros_ws/data/NUS_navgraph.pickle"/>
+  <arg name="latlonTopic" default="/gps/fix"/>
+  <arg name="utmTopic" default="/utm/fix"/>
+
+ <node pkg="tf2_ros" exec="static_transform_publisher" name="tf_pub">
+    <param name="x" value="0.0"/>
+    <param name="y" value="0.0"/>
+    <param name="z" value="0.0"/>
+    <param name="yaw" value="0.0"/>
+    <param name="pitch" value="0.0"/>
+    <param name="roll" value="0.0"/>
+    <param name="frame_id" value="map"/>
+    <param name="child_frame_id" value="base_link"/>
+ </node>
+
+<node pkg="rviz2" exec="rviz2" name="rviz2" args="-d $(find-pkg-share signloc_ros)/rviz/mcl.rviz --ros-args --log-level FATAL">
+</node> 
+
+ <node pkg="signloc_ros" exec="NavSatPublisher.py" name="NavSatPublisher" output="screen">
+<param name="utmTopic"            value="$(var utmTopic)"/>
+<param name="latlonTopic"            value="$(var latlonTopic)"/>
+ </node>
+
+
+
+<node pkg="signloc_ros" exec="MCLNode" name="MCLNode1">
+ <param name="odomTopic"            value="$(var odomTopic)"/>
+ <param name="particleTopic"            value="$(var particleTopic)"/>
+ <param name="signTopic"            value="$(var signTopic)"/>
+ <param name="poseTopic"            value="$(var poseTopic)"/>
+ <param name="navGraphPath"            value="$(var navGraphPath)"/>
+ <param name="utmTopic"            value="$(var utmTopic)"/>
+  <param name="numParticles"            value="100"/>
+</node>
+
+
+  <node pkg="signloc_ros" exec="BroadcastNavGraphNode.py" name="BroadcastNavGraphNode" output="screen">
+<param name="navGraphPath"            value="$(var navGraphPath)"/>
+<param name="utmTopic"            value="$(var utmTopic)"/>
+<param name="latlonTopic"            value="$(var latlonTopic)"/>
+ </node>
+
+ <node pkg="rosbag2_transport" exec="ros2 bag" name="bag_player" output="screen" args="play /data/ros2signs --start-offset 70 --rate 1.0"/>
+
+</launch>

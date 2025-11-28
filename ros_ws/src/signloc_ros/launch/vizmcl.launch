@@ -1,0 +1,25 @@
+<launch>
+
+  <param name="odomTopic" value="/spot/odometry"/>
+  <param name="signTopic" value="/signs"/>
+  <param name="poseTopic" value="/MCLPose"/>
+  <param name="particleTopic" value="/MCLParticles"/>
+  <param name="predictionTopic" value="/MCLPrediction"/>
+  <param name="address" value="3 research link, Singapore 119391"/>
+  <param name="navGraphPath" value="/GraphLoc/data/NUS_navgraph.pickle"/>
+  <param name="latlonTopic" value="/gps/fix"/>
+  <param name="utmTopic" value="/utm/fix"/>
+
+
+  <node pkg="graphloc_ros" type="BroadcastPredictionNode.py" name="BroadcastPredictionNode" output="screen"/>
+
+
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find graphloc_ros)/rviz/viz.rviz"/> 
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake" args="0 0 0 0 0 0 map base_link" />
+
+
+
+
+</launch>

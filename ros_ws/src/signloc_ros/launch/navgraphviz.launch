@@ -1,0 +1,14 @@
+<launch>
+
+  <param name="odomTopic" value="/spot/odometry"/>
+  <param name="signTopic" value="/signs"/>
+  <param name="poseTopic" value="/MCLPose"/>
+  <param name="particleTopic" value="/MCLParticles"/>
+
+  <node pkg="graphloc_ros" type="NavGraphVizNode.py" name="NavGraphVizNode" output="screen">
+    <param name="navGraphPath" value="/GraphLoc/data/JEM_B1-L5_navgraph.pickle"/>
+    <param name="polygonTopic" value="/polygons"/>
+  </node>
+
+ <!--  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find graphloc_ros)/rviz/mcl.rviz" />-->
+</launch>
