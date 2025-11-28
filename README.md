@@ -2,16 +2,15 @@
 
 This repository contains the implementation of the following [publication](https://arxiv.org/pdf/2508.18606):
 ```bibtex
-@misc{zimmerman2025arxiv,
-      title={SignLoc: Robust Localization using Navigation Signs and Public Map}, 
-      author={Nicky Zimmerman and Joel Loo and Ayush Agrawal and David Hsu},
-      year={2025},
-      eprint={2508.18606},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2508.18606}, 
-    }
+@article{zimmerman2025ral,
+  title={SignLoc: Robust Localization using Navigation Signs and Public Maps},
+  author={Zimmerman, Nicky and Loo, Joel and Agrawal, Ayush and Hsu, David},
+  journal={IEEE Robotics and Automation Letters},
+  year={2025},
+  publisher={IEEE}
+}
 ```
+
 ## Results
 Our live demo for both localization on the Spot platform can seen in the following video:
 [![](http://img.youtube.com/vi/EgpQHuaMOrc/0.jpg)](https://www.youtube.com/watch?v=EgpQHuaMOrc "SIGNLOC")
@@ -22,4 +21,13 @@ Navigation signs and maps, such as floor plans and street maps, are widely avail
 
 ![Motivation](pics/Motivation.jpg)
 
-## Code is coming soon!
+## Installation
+
+We provide both ROS Noetic and ROS Humble dockers for the installation
+
+## Execution
+
+For ROS Noetic, run
+```
+roslaunch signloc_ros mclcpp.launch
+```
