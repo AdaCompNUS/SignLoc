@@ -1,0 +1,58 @@
+FROM ros:humble-ros-base
+ENV DEBIAN_FRONTEND=noninteractive
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute
+
+
+
+RUN apt-get update && apt-get install -y \
+    locales \
+    python3-pip \
+    ros-humble-xacro \
+    ros-humble-launch-xml \
+    ros-humble-cv-bridge \
+    ros-humble-launch-testing-ament-cmake \
+    ros-humble-rviz2 \
+    ros-humble-tf-transformations \
+    ros-humble-rqt \
+    ros-humble-rqt-image-view \
+    ros-humble-rqt-tf-tree \
+    libopus-dev \
+    python3 \
+    python3-dev \
+    nano \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US.UTF-8
+
+SHELL ["/bin/bash", "-c"]
+
+
+RUN pip install opencv-python networkx matplotlib shapely tqdm thefuzz utm geopy contextily 
+RUN apt-get update && \
+    apt-get install -y tmux libeigen3-dev python3-pybind11 ros-humble-rviz-satellite ros-humble-navigation2 \
+    ros-humble-nav2-bringup  libboost-all-dev && \
+    rm -rf /var/lib/apt/lists/*
+RUN pip install numpy==1.24.4
+
+
+COPY /ros2_ws /ros_ws
+
+COPY /signloc_core /ros_ws/src/signloc_ros/signloc_core
+
+RUN cd /usr/include/ && sudo ln -sf eigen3/Eigen Eigen
+
+RUN cd /ros_ws/src/signloc_ros/signloc_core &&  cmake -S . -B build  -DPYTHON_INCLUDE_DIR="/usr/include/python3.10" && cmake --build build 
+
+RUN cd /ros_ws && source /ros_entrypoint.sh && \
+  colcon build  --packages-up-to signloc_msgs  --cmake-clean-cache && rm -r build log
+
+RUN cd /ros_ws && source install/setup.bash && \
+  colcon build  --packages-up-to signloc_ros  --cmake-clean-cache && rm -r build log
+
+
+COPY /data /ros_ws/data
+
+WORKDIR /ros_ws
+
+# numpy == 1.24.4
