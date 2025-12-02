@@ -31,3 +31,5 @@ For ROS Noetic, run
 ```
 roslaunch signloc_ros mclcpp.launch
 ```
+We also have a rosbag to try out with the code, but because our university has some issues with publicly shared storage, we can't just link it here (for now).
+So if you are interested, email us, and we can share the file with you by adding your email to "can view" list.
