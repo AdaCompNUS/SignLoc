@@ -33,3 +33,4 @@ roslaunch signloc_ros mclcpp.launch
 ```
 We also have a rosbag to try out with the code, but because our university has some issues with publicly shared storage, we can't just link it here (for now).
 So if you are interested, email us, and we can share the file with you by adding your email to "can view" list.
+You can also try this [dropbox link](https://www.dropbox.com/scl/fi/sjz2os81lg7k8sb7iqqhp/ral2025.bag?rlkey=d2xizcrpulclp7lv25djz57ga&e=1&st=bdkzr1et&dl=0), maybe it actually works.
